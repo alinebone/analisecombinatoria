@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Análise Combinatória</title>
+    <meta name="description" content="Arranjo simples, arranjo com repetição, permutação, combinação simples e combinação com repetição.">
+    <meta name="author" content="Aline Ebone">
+    <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="js/funcoes.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-45365093-5', 'conversordemedidas.info');
+    ga('send', 'pageview');
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h1>Análise Combinatória</h1>
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class="col-lg-6">
+                <div class="well">
+                    <form class="bs-example form-horizontal">
+                        <fieldset>
+                            <legend>Preencha os campos</legend>
+                            <div class="form-group">
+                                <label for="tipo" class="col-lg-4 control-label">Escolha o tipo: </label>
+                                <div class="col-lg-8">
+                                    <select id="tipo" class="form-control" name="tipo">
+                                        <option value="as">Arranjo Simples</option>
+                                        <option value="ar">Arranjo Com Repetição</option>
+                                        <option value="p">Permutação</option>
+                                        <option value="cs">Combinação Simples</option>  
+                                        <option value="cr">Combinação Com Repetição</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">    
+                                <label for="nElementos" class="col-lg-4 control-label">Número de elementos: </label>
+                                <div class="col-lg-8">
+                                    <input type="number" class="form-control" id="nElementos" name="nElementos" placeholder="Número de elementos">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nGrupos" class="col-lg-4 control-label">Número de grupos: </label>
+                                <div class="col-lg-8">
+                                    <input type="number" class="form-control" id="nGrupos" name="nGrupos" placeholder="Número de grupos">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12 col-lg-offset-2">
+                                    <input type="button" class="btn btn-success" id="btnCalcular" value="Calcular">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <h4>Resultado:</h4>
+                    <p id="resultado"></p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <p><em>Análise combinatória</em> é um conjunto de procedimentos que possibilita a construção de grupos diferentes formados por um número finito de elementos de um conjunto sob certas circunstâncias. Os tipos mais conhecidos são (tomando-se conjuntos de m elementos):</p>
+                    <hr>
+                    <h4>Arranjos:</h4>
+                    <p>São agrupamentos formados por p elementos, de forma que os p elementos sejam distintos entre si pela ordem ou pela espécie. Há duas formas principais:</p>
+                    <h5><em>Simples:</em></h5>
+                    <p>Não ocorre a repetição de qualquer elemento em cada grupo de p elementos;
+                        Ex.: considerando as letras A,B,C,D, quantos pares de letras distintas pode-se formar?
+                        Considerando que AB é diferente de BA, então tem-se um arranjo.
+                        m = 4
+                        p = 2
+                        AS(m,p) = m! / (m-p)!
+                        AS(4,2) = 4! / (4-2)! = 12
+                        {AB,AC,AD,BA,BC,BD,CA,CB,CD,DA,DB,DC}</p>
+                        <h5><em>Com Repetição:</em></h5>
+                        <p>Todos os elementos podem aparecer repetidos em cada grupo de p elementos;
+                            Ex.: considerando as letras A,B,C,D, quantos pares de letras (não necessariamente distintas) pode-se formar?
+                            Considerando que AB é diferente de BA, então tem-se um arranjo.
+                            m = 4
+                            p = 2
+                            AR(m,p) = mp
+                            AR(4,2) = 42 = 16
+                            {AA,AB,AC,AD,BA,BB,BC,BD,CA,CB,CC,CD,DA,DB,DC,DD}
+                        </p>
+                        <h4>Permutações:</h4>
+                        <p>São agrupamentos considerando os m elementos, de forma que os m elementos sejam distintos entre si pela ordem.
+                            Ex.: considerando as letras A,B,C, quantas combinações distintas pode-se formar?
+                            m = 3
+                            P(m) = m!
+                            P(3) = 3! = 6
+                            {ABC,ACB,BAC,BCA,CAB,CBA}
+                        </p>
+                        <h4>Combinações:</h4>
+                        <p>São agrupamentos formados por p elementos, de forma que os p elementos sejam distintos entre si apenas pela espécie. Há duas formas principais:</p>
+                        <h5><em>Simples:</em></h5>
+                        <p>Não ocorre a repetição de qualquer elemento em cada grupo de p elementos;
+                            Ex.: considerando as letras A,B,C,D, quantos pares de letras distintas pode-se formar?
+                            Considerando que AB e BA são o mesmo par, então tem-se uma combinação.
+                            m = 4
+                            p = 2
+                            CS(m,p) = m! / ((m-p)! * p!)
+                            CS(4,2) = 4! / (2! * 2!) = 6
+                            {AB,AC,AD,BC,BD,CD}</p>
+                            <h5><em>Com Repetição:</h5></em>
+                            <p>Todos os elementos podem aparecer repetidos em cada grupo até p vezes;
+                                Ex.: considerando as letras A,B,C,D, quantos pares de letras (não necessariamente distintas) pode-se formar?
+                                Considerando que AB e BA são o mesmo par, então tem-se uma combinação.
+                                m = 4
+                                p = 2
+                                CR(m,p) = CS(m+p-1,p)
+                                CR(4,2) = CS(5,2) = 5! / (3! * 2!) = 10
+                                {AA,AB,AC,AD,BB,BC,BD,CC,CD,DD}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+            </html>
